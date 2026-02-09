@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solo para ti ❤️</title>
+
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #8e2de2, #4a00e0);
+    font-family: Arial, sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 6vw, 2.6rem);
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+    max-width: 90%;
+    line-height: 1.5;
+    white-space: pre-line;
+  }
+
+  button {
+    padding: 14px 30px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background: white;
+    color: #ff4d6d;
+    margin-top: 25px;
+  }
+
+  #botones {
+    display: none;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: center;
+  }
+
+  .heart {
+    font-size: 4rem;
+    margin-top: 30px;
+    animation: latir 1s infinite;
+  }
+
+  @keyframes latir {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+  }
+</style>
+</head>
+
+<body>
+
+<h1 id="titulo">Hola ❤️</h1>
+<p id="texto">Cargando algo especial para ti…</p>
+
+<button id="startBtn">💖 Toca aquí 💖</button>
+
+<div id="botones">
+  <button id="siBtn">Sí 💖</button>
+  <button id="noBtn">No 🙃</button>
+</div>
+
+<div id="corazon"></div>
+
+<script>
+var iniciado = false;
+
+var titulo = document.getElementById("titulo");
+var texto = document.getElementById("texto");
+var startBtn = document.getElementById("startBtn");
+var botones = document.getElementById("botones");
+var siBtn = document.getElementById("siBtn");
+var noBtn = document.getElementById("noBtn");
+var corazon = document.getElementById("corazon");
+
+var sizeSi = 1;
+
+function escribir(el, msg) {
+  el.textContent = "";
+  var i = 0;
+  var intervalo = setInterval(function () {
+    el.textContent += msg.charAt(i);
+    i++;
+    if (i >= msg.length) clearInterval(intervalo);
+  }, 40);
+}
+
+startBtn.onclick = function () {
+  if (iniciado) return;
+  iniciado = true;
+
+  startBtn.style.display = "none";
+
+  escribir(titulo, "Hola, amor ❤️");
+  escribir(texto, "Esto no es una página cualquiera.\nLa hice pensando solo en ti.");
+
+  setTimeout(function () {
+    escribir(texto, "Quiero decirte algo importante…\n¿Quieres saber qué es?");
+    botones.style.display = "flex";
+  }, 3000);
+};
+
+noBtn.onclick = function () {
+  sizeSi += 0.3;
+  siBtn.style.transform = "scale(" + sizeSi + ")";
+  escribir(texto, "No acepto un no como respuesta 😌");
+};
+
+siBtn.onclick = function () {
+  botones.style.display = "none";
+  escribir(titulo, "Te Adoro 🤍");
+
+  setTimeout(function () {
+    escribir(
+      texto,
+      "Entre tantas personas que hay en el mundo,\n" +
+      "yo solo te quiero a ti.\n\n" +
+      "Eres única, especial y mi lugar favorito.\n\n" +
+      "Mi corazón es tuyo 🤍"
+    );
+    corazon.innerHTML = "<div class='heart'>🤍</div>";
+  }, 2000);
+};
+</script>
+
+</body>
+</html>
